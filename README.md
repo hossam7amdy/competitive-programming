@@ -9,4 +9,3 @@ To master this skill I followed these guides:
 3- Top 150 problems in LeetCode [link]
 
 Note: each problem link will be attached on its related file or the file name itself.
-# competitive-programming
