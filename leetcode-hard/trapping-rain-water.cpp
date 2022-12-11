@@ -17,9 +17,22 @@ using namespace std;
 # Complexity
     - Time complexity: O(nlogn)
     - Space complexity: O(n)
+
+----------------------------------------------
+#Intuition
+    With simple observation we can get ride of the extra space `maxHeap` with two variables to keep track of maxLeft & maxRight.
+    (e.g., `11.Container With Most Water` problem)
+
+# Approach 2: Two pointers
+    - left & right pointers to utilize the max building on both sides
+    - with each move calculate how many water can the current building can hold & update left and right pointers
+
+# Complexity
+    - Time complexity: O(n)
+    - Space complexity: O(1)
 */
 
-int trap(const vector<int>& height) {
+int trap_(const vector<int>& height) {
     int maxWater = 0;
     int leftMax = height[0];
     // use reverse sorted vector
@@ -42,6 +55,27 @@ int trap(const vector<int>& height) {
 
         // add if valid
         maxWater += max(min(leftMax, rightMax.first) - curVal, 0);
+    }
+
+    return maxWater;
+}
+
+int trap(const vector<int>& height) {
+    int maxWater = 0;
+    int st = 0, en = height.size() - 1;
+    int leftMax = 0, rightMax = 0;
+
+    while(st < en){
+        leftMax = max(leftMax, height[st]);
+        rightMax = max(rightMax, height[en]);
+
+        if(leftMax < rightMax){
+            maxWater += min(leftMax,rightMax) - height[st];
+            ++st;
+        }else{
+            maxWater += min(leftMax,rightMax) - height[en];
+            --en;
+        }
     }
 
     return maxWater;
