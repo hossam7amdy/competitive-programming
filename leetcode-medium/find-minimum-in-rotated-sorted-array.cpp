@@ -3,7 +3,7 @@ using namespace std;
 
 /*
 #Approach: Binary Search
-    - split the array and decide witch direction is best
+    - split the array and decide which direction is best
 
 #Complexity
     - Time: O(logn)
