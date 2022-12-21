@@ -16,11 +16,8 @@ int findMin(const vector<int>& nums) {
     while(st < en){
         int mid = st + (en - st) / 2;
 
-        if(mid && nums[mid-1] >= nums[mid] && nums[mid] <= nums[mid+1])
-            return nums[mid]; // found [2,1,3]
-
-        if(nums[mid] < nums[en])
-            en = mid - 1;
+        if(nums[mid] <= nums[en])
+            en = mid;
         else
             st = mid + 1;
     }
