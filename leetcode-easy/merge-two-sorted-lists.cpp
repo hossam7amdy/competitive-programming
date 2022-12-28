@@ -2,30 +2,18 @@
 using namespace std;
 
 /*
-    Merge the two lists in a one sorted list. Return the head of the merged linked list.
+Merge the two lists in a one sorted list. Return the head of the merged linked list.
 
-    Solution: simulating the merge function form merge-sort algorithm
-        - Time: O(n+m)
-        - Space: O(n+m)
+Solution: simulating the merge function form merge-sort algorithm
+    - Time: O(n+m)
+    - Space: O(1)
 */
 
+ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+    if(!list1 && !list2) return nullptr;
 
-ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) { // iterative
-    // if one list only
-    if(!list2) return list1;
-    if(!list1) return list2;
-
-    // compare and merge as logn as there are elements in the two lists
-    ListNode *result;
-    if(list1->val <= list2->val){
-        result = list1;
-        list1 = list1->next;
-    }else{
-        result = list2;
-        list2 = list2->next;
-    }
-
-    ListNode *cursor = result;
+    ListNode *head = new ListNode(-1); // dummy
+    ListNode *cursor = head;
     while(list1 && list2){
         if(list1->val <= list2->val){
             cursor->next = list1;
@@ -37,30 +25,12 @@ ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) { // iterative
         cursor = cursor->next;
     }
 
-    // check the remaining list
-    if(list1){
-        cursor->next = list1;
-    }else{
+    if(!list1)
         cursor->next = list2;
-    }
+    if(!list2)
+        cursor->next = list1;
 
-    return result;
-}
-
-
-ListNode* mergeTwoLists_(ListNode* list1, ListNode* list2) { // recursive
-    if(!list1 && !list2)
-        return nullptr;
-
-    if(!list1) return list2;
-    if(!list2) return list1;
-
-    if(list1->val <= list2->val){
-        list1->next = mergeTwoLists(list1->next, list2);
-        return list1;
-    }
-    list2->next = mergeTwoLists(list1, list2->next);
-    return list2;
+    return head->next; // ignore dummy node
 }
 
 int main(){
