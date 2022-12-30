@@ -1,8 +1,10 @@
+// https://leetcode.com/problems/add-two-numbers
+
 #include<bits/stdc++.h>
 using namespace std;
 
 /*
-#Approach: normal sum with carful carry handling
+#Approach: normal sum with careful carry handling
 
 #Complexity
     - Time: O(max(n,m))
@@ -21,7 +23,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 
         carry = sum > 9;
         if(carry) sum -= 10;
-    
+
         cursor->next = l1 ? l1 : l2;
         cursor = cursor->next;
         cursor->val = sum;
